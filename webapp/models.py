@@ -37,8 +37,8 @@ class Subject(models.Model):
 
 
 class Contributor(models.Model):
-    
-    """This model Contributor will contain the contributors for the website. """
+     """This model Contributor will contain the contributor details for the 
+	website. """
     user = models.OneToOneField(User)
     # Addition info
     contact = models.CharField(max_length=12, blank=True)
@@ -51,7 +51,7 @@ class Contributor(models.Model):
 
 
 class Reviewer(models.Model):
-    """ This model Reviewer will contain the reviewers for the website. """
+    """ This model Reviewer will contain the reviewer details for the website. """
     user = models.OneToOneField(User)
     # Addition info
     contact = models.CharField(max_length=12, blank=True)
