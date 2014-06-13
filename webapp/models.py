@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Class(models.Model):
-    """This will be class number like first, second .. eight .. tenth."""
+    """This model will be class number like first, second .. eight .. tenth."""
     class_number = models.IntegerField(default=1)
     remark = models.TextField()
 
@@ -12,7 +12,7 @@ class Class(models.Model):
 
 
 class Subject(models.Model):
-    """Subjects."""
+    """This model Subject will contain the materials uploaded by the contributor."""
     # contributor = models.ForeignKey(Contributor)
     name = models.CharField(max_length=50)
     topic = models.CharField(max_length=200)
@@ -37,6 +37,8 @@ class Subject(models.Model):
 
 
 class Contributor(models.Model):
+    
+    """This model Contributor will contain the contributors for the website. """
     user = models.OneToOneField(User)
     # Addition info
     contact = models.CharField(max_length=12, blank=True)
@@ -49,6 +51,7 @@ class Contributor(models.Model):
 
 
 class Reviewer(models.Model):
+    """ This model Reviewer will contain the reviewers for the website. """
     user = models.OneToOneField(User)
     # Addition info
     contact = models.CharField(max_length=12, blank=True)
@@ -79,7 +82,7 @@ class Faq(models.Model):
 
 
 class Comment(models.Model):
-
+    """ This model comment will contains the reviewer comments on the uploads. """
     subject=models.ForeignKey(Subject)
     user = models.ForeignKey(Reviewer)
     comment = models.TextField(max_length = 1000)
