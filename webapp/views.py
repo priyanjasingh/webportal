@@ -119,14 +119,16 @@ def contributor_signup(request):
 	        if user_form.is_valid() and contributor_form.is_valid():
 			user = user_form.save()
                 	print "Forms are Valid"
+			print request
+			
             		print user.username
             		print user.first_name
             		user.set_password(user.password)
            		user.save()
-
                         contributor = contributor_form.save(commit=False)
 			contributor.user = user
-
+			if request.POST['add_another_subject']:
+				contributor.subject = request.POST['add_another_subject']
                         if 'picture' in request.FILES:
                 		contributor.picture = request.FILES['picture']
 			if 'validation_docs' in request.FILES:
@@ -165,7 +167,8 @@ def reviewer_signup(request):
 	        reviewer_form = ReviewerForm(data=request.POST)
 	        if user_form.is_valid() and reviewer_form.is_valid():
 			user = user_form.save()
-                	print "Forms are Valid"
+                	print "Forms are Valid"  
+                        print request
             		print user.username
             		print user.first_name
             		user.set_password(user.password)

@@ -53,21 +53,30 @@ class ContributorForm(forms.ModelForm):
         				help_text="", required=False,
        						 error_messages={'required':'Last name is required.'})
 
-	specialised_subject = forms.CharField(
-        	widget= forms.TextInput(
-            		attrs={'class': 'form-control',
-                   		'placeholder': 'Contribtor specialised subject.'}),
-        				help_text="", required=False,
-       						 error_messages={'required':'specialised subject is required.'})
+	subject = forms.ModelChoiceField(
+		       label='Subject',
+		       cache_choices=True,
+		       widget=None,
+		       queryset=Subject.objects.all().order_by('name'),
+		       empty_label=None,
+		       help_text="",required=False,
+                       error_messages={'required':'Subject is required'})	
 	
+	add_another_subject = forms.CharField(    	
+			widget= forms.TextInput(
+            		attrs={'class': 'form-control',
+                   		'placeholder': 'Add new subject.'}),
+        				help_text="If subject is not present, please enter here", required=False)
+
 	validation_docs = forms.FileField(
         	label = 'Validation file.',
         		widget = forms.FileInput(),
         			help_text = 'Upload validation file.',
         				required=False)
+	
 	class Meta:
         		model =  Contributor
-        		fields = ('picture', 'contact','specialised_subject', 'validation_docs')
+        		fields = ('picture', 'contact','subject', 'validation_docs')
 
 	def clean_validtion_docs_file(self):
         		"""Limit doc_file upload size."""
@@ -97,16 +106,18 @@ class ReviewerForm(forms.ModelForm):
         				help_text="", required=False,
        						 error_messages={'required':'Last name is required.'})
 
-	specialised_subject = forms.CharField(
-        	widget= forms.TextInput(
-            		attrs={'class': 'form-control',
-                   		'placeholder': 'Reviewer specialised subject.'}),
-        				help_text="", required=False,
-       						 error_messages={'required':'specialised subject is required.'})
+	subject = forms.ModelChoiceField(
+		       label='Subject',
+		       cache_choices=True,
+		       widget=None,
+		       queryset=Subject.objects.all().order_by('name'),
+		       empty_label=None,
+		       help_text="",required=False,
+                       error_messages={'required':'Subject is required'})	
 	
 	class Meta:
         		model =  Reviewer
-        		fields = ('picture', 'contact','specialised_subject')
+        		fields = ('picture', 'contact','subject')
 
 	def clean_picture_file(self):
         		"""Limit doc_file upload size."""
