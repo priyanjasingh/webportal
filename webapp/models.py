@@ -13,7 +13,7 @@ class Class(models.Model):
 
 class Subject(models.Model):
     """This model Subject will contain the materials uploaded by the contributor."""
-    # contributor = models.ForeignKey(Contributor)
+    contributor = models.ForeignKey(Contributor)
     name = models.CharField(max_length=50)
     topic = models.CharField(max_length=200)
     class_number = models.ForeignKey(Class)
@@ -42,7 +42,7 @@ class Contributor(models.Model):
     # Addition info
     contact = models.CharField(max_length=12, blank=True)
     picture = models.ImageField(upload_to='profile_image', blank=True)
-    subject = models.ManyToManyField(Subject)
+    # subject = models.ManyToManyField(Subject)
     validation_docs = models.FileField(upload_to='validation_docs',blank=False)
 
     def __unicode__(self):
@@ -55,7 +55,7 @@ class Reviewer(models.Model):
     # Addition info
     contact = models.CharField(max_length=12, blank=True)
     picture = models.ImageField(upload_to='profile_image', blank=True)
-    subject = models.ManyToManyField(Subject)
+    # subject = models.ManyToManyField(Subject)
 
     def __unicode__(self):
         return self.user.username
